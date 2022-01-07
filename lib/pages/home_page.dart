@@ -6,7 +6,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Resep> mResep = masterResep;
+    List<Resep> mResep ;
     return Scaffold(
       body: Stack(
         children: [
@@ -30,8 +30,9 @@ class HomePage extends StatelessWidget {
                     height: 20,
                   ),
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: mResep.map((e) => (Text(e.judul))).toList(),
+                    children: [],
+                    // crossAxisAlignment: CrossAxisAlignment.start,
+                    // children: mResep.map((e) => (Text(e.judul))).toList(),
                   ),
                 ],
               )),
