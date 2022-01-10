@@ -1,12 +1,31 @@
-import 'package:equatable/equatable.dart';
 
-class Resep extends Equatable {
+class ResepListModel {
+  String? method;
+  bool? status;
+  List<Resep>? results;
+
+  ResepListModel({this.method, this.status, this.results});
+
+  ResepListModel.fromJson(Map<String, dynamic> json) {
+    method = json['method'];
+    status = json['status'];
+    if (json['results'] != null) {
+      results = <Resep>[];
+      json['results'].forEach((v) {
+        results!.add(Resep.fromJson(v));
+      });
+    }
+  }
+}
+
+
+class Resep {
   final String key;
   final String title;
   final String thumb;
   final String times;
   final String portion;
-  final String difficult;
+  final String dificulty;
 
   const Resep(
       {required this.key,
@@ -14,7 +33,7 @@ class Resep extends Equatable {
       required this.thumb,
       required this.times,
       required this.portion,
-      required this.difficult});
+      required this.dificulty});
 
   factory Resep.fromJson(Map<String, dynamic> data) => Resep(
       key: data['key'],
@@ -22,17 +41,7 @@ class Resep extends Equatable {
       thumb: data['thumb'],
       times: data['times'],
       portion: data['portion'],
-      difficult: data['difficult']);
+      dificulty: data['dificulty']);
 
-  Map<String, dynamic> toJson() => {
-        'key': key,
-        'title': title,
-        'thumb': thumb,
-        'times': times,
-        'portion': portion,
-        'difficult': difficult
-      };
-
-  @override
-  List<Object?> get props => [key, title, thumb, times, portion, difficult];
 }
+

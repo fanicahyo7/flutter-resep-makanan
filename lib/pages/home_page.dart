@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_resep_makanan/models/resep.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_resep_makanan/bloc/resep_bloc.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    context.read<ResepBloc>().add(FetchResep());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    List<Resep> mResep ;
     return Scaffold(
       body: Stack(
         children: [
@@ -29,11 +40,19 @@ class HomePage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Column(
-                    children: [],
-                    // crossAxisAlignment: CrossAxisAlignment.start,
-                    // children: mResep.map((e) => (Text(e.judul))).toList(),
-                  ),
+                  BlocBuilder<ResepBloc, ResepState>(builder: (context, state) {
+                    if (state is ResepLoading) {
+                      return const CircularProgressIndicator();
+                    } else if (state is ResepLoaded) {
+                      return Column(
+                        children: state.reseplist.results!.map((e) => Text(e.title)).toList(),
+                      );
+                    } else if (state is ResepFailed) {
+                      return const Text('asdsd');
+                    } else {
+                       return const CircularProgressIndicator();
+                    }
+                  })
                 ],
               )),
         ],
