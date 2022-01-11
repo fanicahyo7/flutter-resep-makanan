@@ -10,7 +10,7 @@ class ResepBloc extends Bloc<ResepEvent, ResepState> {
     on<FetchResep>((event, emit) async {
       try {
         emit(ResepLoading());
-        ResepListModel reseps = await ResepServices().getNewReseps();
+        ResepListModel reseps = await ResepServices().getReseps();
         emit(ResepLoaded(reseps));
       } catch (e) {
         emit(ResepFailed(e.toString()));

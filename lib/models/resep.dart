@@ -18,7 +18,6 @@ class ResepListModel {
   }
 }
 
-
 class Resep {
   final String key;
   final String title;
