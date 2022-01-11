@@ -32,31 +32,31 @@ class ButtonCattegory extends StatelessWidget {
   String getImageFromTitle(String genre) {
     switch (genre) {
       case "Dessert":
-        return "assets/ic_horror.png";
+        return "assets/ketupat.png";
       case "Masakan Hari Raya":
-        return "assets/ic_music.png";
+        return "assets/ketupat.png";
 
       case "Masakan Tradisional":
-        return "assets/ic_action.png";
+        return "assets/ketupat.png";
 
       case "Menu Makan Malam":
-        return "assets/ic_drama.png";
+        return "assets/ketupat.png";
 
       case "Menu Makan Siang":
-        return "assets/ic_war.png";
+        return "assets/ketupat.png";
 
       case "Resep Ayam":
-        return "assets/ic_crime.png";
+        return "assets/ketupat.png";
 
       case "Resep Daging":
-        return "assets/ic_crime.png";
+        return "assets/ketupat.png";
 
       case "Resep Sayuran":
-        return "assets/ic_crime.png";
+        return "assets/ketupat.png";
       case "Resep Seafood":
-        return "assets/ic_crime.png";
+        return "assets/ketupat.png";
       case "Sarapan":
-        return "assets/ic_crime.png";
+        return "assets/ketupat.png";
 
       default:
         return "";

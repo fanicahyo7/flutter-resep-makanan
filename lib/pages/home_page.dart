@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/newresep/newresep_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/resep/resep_bloc.dart';
+import 'package:flutter_resep_makanan/bloc/resepcategory/resepcategory_bloc.dart';
 import 'package:flutter_resep_makanan/shared/theme.dart';
+import 'package:flutter_resep_makanan/widgets/button_category.dart';
 import 'package:flutter_resep_makanan/widgets/newresep_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     context.read<NewresepBloc>().add(FetchNewResep());
+    context.read<ResepcategoryBloc>().add(FetchCategory());
     context.read<ResepBloc>().add(FetchResep());
     super.initState();
   }
@@ -102,11 +105,47 @@ class _HomePageState extends State<HomePage> {
       });
     }
 
+    Widget category() {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(
+                top: 10, left: defaultMargin, right: defaultMargin, bottom: 10),
+            child: Text('Kategori',
+                style: blackTextStyle.copyWith(fontSize: 16, fontWeight: bold)),
+          ),
+          BlocBuilder<ResepcategoryBloc, ResepcategoryState>(
+              builder: (context, state) {
+            if (state is ResepcategoryLoaded) {
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: state.list.results
+                          .map(
+                            (e) => ButtonCattegory(
+                              title: e.category,
+                            ),
+                          )
+                          .toList()),
+                ),
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
+          })
+        ],
+      );
+    }
+
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
           child: ListView(
-        children: [header(), newResep()],
+        children: [header(), newResep(), category()],
       )),
     );
   }
