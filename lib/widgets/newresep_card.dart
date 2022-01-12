@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_resep_makanan/models/resep.dart';
+import 'package:flutter_resep_makanan/shared/theme.dart';
 
 class NewResepCard extends StatelessWidget {
   final Resep resep;
@@ -12,6 +13,8 @@ class NewResepCard extends StatelessWidget {
       alignment: Alignment.topCenter,
       height: 209,
       width: 231,
+      decoration: BoxDecoration(
+          color: kWhiteColor, borderRadius: BorderRadius.circular(14)),
       child: Column(
         children: [
           Container(
@@ -27,9 +30,12 @@ class NewResepCard extends StatelessWidget {
             height: 5,
           ),
           Expanded(
-              child: Text(
-            resep.title,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            child: Text(
+              resep.title,
+              style: blackTextStyle.copyWith(fontWeight: bold),
+            ),
           ))
         ],
       ),

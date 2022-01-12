@@ -6,58 +6,54 @@ class ButtonCattegory extends StatelessWidget {
   const ButtonCattegory({Key? key, required this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Container(
-            margin: const EdgeInsets.only(bottom: 4),
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8)),
-            child: Center(
-                child: SizedBox(
-                    height: 36,
-                    child:
-                        Image(image: AssetImage(getImageFromTitle(title)))))),
-        const SizedBox(
-          height: 4,
-        ),
-        Text(
-          title,
-          style: blackTextStyle.copyWith(fontSize: 13),
-        )
-      ],
+    return Container(
+      color: kWhiteColor,
+      child: Column(
+        children: <Widget>[
+          Container(
+              margin: const EdgeInsets.only(bottom: 4),
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),color: kPrimaryColor),
+              child: Center(
+                  child: SizedBox(
+                      height: 36,
+                      child:
+                          Image(image: AssetImage(getImageFromTitle(title)))))),
+          const SizedBox(
+            height: 4,
+          ),
+          Text(
+            title,
+            style: blackTextStyle.copyWith(fontSize: 13),
+          )
+        ],
+      ),
     );
   }
 
   String getImageFromTitle(String genre) {
     switch (genre) {
       case "Dessert":
-        return "assets/ketupat.png";
+        return "assets/cake-slice.png";
       case "Masakan Hari Raya":
         return "assets/ketupat.png";
-
       case "Masakan Tradisional":
-        return "assets/ketupat.png";
-
+        return "assets/market.png";
       case "Menu Makan Malam":
-        return "assets/ketupat.png";
-
+        return "assets/dinner.png";
       case "Menu Makan Siang":
-        return "assets/ketupat.png";
-
+        return "assets/lunch-time.png";
       case "Resep Ayam":
-        return "assets/ketupat.png";
-
+        return "assets/chicken-leg.png";
       case "Resep Daging":
-        return "assets/ketupat.png";
-
+        return "assets/meat.png";
       case "Resep Sayuran":
-        return "assets/ketupat.png";
+        return "assets/vegetable.png";
       case "Resep Seafood":
-        return "assets/ketupat.png";
+        return "assets/shrimp.png";
       case "Sarapan":
-        return "assets/ketupat.png";
-
+        return "assets/Breakfast.png";
       default:
         return "";
     }
