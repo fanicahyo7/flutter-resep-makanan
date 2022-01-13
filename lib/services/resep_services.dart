@@ -29,4 +29,13 @@ class ResepServices {
       return ResepCategoryModel.fromJson(e.response?.data);
     }
   }
+
+  Future<ResepDetailModel> getResepDetail(String key) async {
+    try {
+      Response response = await _dio.get(baseURL + "/recipe/" + key);
+      return ResepDetailModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return ResepDetailModel.fromJson(e.response?.data);
+    }
+  }
 }

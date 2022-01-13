@@ -7,25 +7,28 @@ class ButtonCattegory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: kWhiteColor,
+      decoration: BoxDecoration(
+          color: kWhiteColor, borderRadius: BorderRadius.circular(14)),
       child: Column(
         children: <Widget>[
           Container(
-              margin: const EdgeInsets.only(bottom: 4),
+              margin: const EdgeInsets.only(bottom: 4, top: 8),
               height: 50,
               width: 50,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(8),color: kPrimaryColor),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8), color: kPrimaryColor),
               child: Center(
                   child: SizedBox(
                       height: 36,
                       child:
                           Image(image: AssetImage(getImageFromTitle(title)))))),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(
-            title,
-            style: blackTextStyle.copyWith(fontSize: 13),
+          
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(
+              title,
+              style: blackTextStyle.copyWith(fontSize: 13),
+            ),
           )
         ],
       ),

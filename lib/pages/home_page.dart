@@ -161,11 +161,21 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
-      body: SafeArea(
-          child: ListView(
-        children: [header(), newResep(), category(), resepList()],
-      )),
+      body: Stack(
+        children: [
+          Container(
+            color: kPrimaryColor,
+          ),
+          SafeArea(
+              child: Container(
+            color: Colors.grey[50],
+          )),
+          SafeArea(
+              child: ListView(
+            children: [header(), newResep(), category(), resepList()],
+          )),
+        ],
+      ),
     );
   }
 }
