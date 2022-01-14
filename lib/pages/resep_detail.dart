@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_resep_makanan/models/resep.dart';
 import 'package:flutter_resep_makanan/shared/theme.dart';
 
-class ResepDetail extends StatelessWidget {
+class ResepDetail extends StatefulWidget {
   final Resep resep;
   const ResepDetail({Key? key, required this.resep}) : super(key: key);
+
+  @override
+  State<ResepDetail> createState() => _ResepDetailState();
+}
+
+class _ResepDetailState extends State<ResepDetail> {
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,9 @@ class ResepDetail extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
                       child: Container(
                         height: 30,
                         width: 30,
@@ -50,6 +58,26 @@ class ResepDetail extends StatelessWidget {
                     ),
                   ),
                 ),
+                Container(
+                  margin: const EdgeInsets.only(top: 180),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: defaultMargin, vertical: 26),
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(38.2),
+                          topRight: Radius.circular(38.2)),
+                      color: Colors.white),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.resep.title,
+                        style: blackTextStyle.copyWith(
+                            fontWeight: bold, fontSize: 20),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),

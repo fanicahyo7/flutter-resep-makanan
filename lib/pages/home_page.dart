@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
           ),
           SafeArea(
               child: Container(
-            color: Colors.grey[50],
+            color: Colors.grey[100],
           )),
           SafeArea(
               child: ListView(
