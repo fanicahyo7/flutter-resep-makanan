@@ -8,7 +8,16 @@ class ButtonCattegory extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: kWhiteColor, borderRadius: BorderRadius.circular(14)),
+        color: kWhiteColor,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.grey,
+            offset: Offset(0.0, 1.0),
+            blurRadius: 1.0,
+          ),
+        ],
+      ),
       child: Column(
         children: <Widget>[
           Container(
@@ -16,13 +25,21 @@ class ButtonCattegory extends StatelessWidget {
               height: 50,
               width: 50,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), color: kPrimaryColor),
+                borderRadius: BorderRadius.circular(8),
+                color: kPrimaryColor,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(0.0, 1.0),
+                    blurRadius: 6.0,
+                  ),
+                ],
+              ),
               child: Center(
                   child: SizedBox(
                       height: 36,
                       child:
                           Image(image: AssetImage(getImageFromTitle(title)))))),
-          
           Padding(
             padding: const EdgeInsets.all(4.0),
             child: Text(

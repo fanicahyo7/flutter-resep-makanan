@@ -8,8 +8,7 @@ class ResepDetailModel {
   ResepDetailModel.fromJson(Map<String, dynamic> json) {
     method = json['method'];
     status = json['status'];
-    results =
-        json['results'] = ResepDetail.fromJson(json['results']) ;
+    results = json['results'] = ResepDetail.fromJson(json['results']);
   }
 }
 
@@ -43,8 +42,7 @@ class ResepDetail {
     servings = json['servings'];
     times = json['times'];
     dificulty = json['dificulty'];
-    author =
-        json['author'] != null ? Author.fromJson(json['author']) : null;
+    author = json['author'] != null ? Author.fromJson(json['author']) : null;
     desc = json['desc'];
     if (json['needItem'] != null) {
       needItem = <NeedItem>[];

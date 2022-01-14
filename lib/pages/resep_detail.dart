@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_resep_makanan/bloc/resepdetail/resepdetail_bloc.dart';
 import 'package:flutter_resep_makanan/models/resep.dart';
 import 'package:flutter_resep_makanan/shared/theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ResepDetail extends StatefulWidget {
   final Resep resep;
@@ -11,6 +14,11 @@ class ResepDetail extends StatefulWidget {
 }
 
 class _ResepDetailState extends State<ResepDetail> {
+  @override
+  void initState() {
+    context.read<ResepdetailBloc>().add(FetchResepDetail(widget.resep.key));
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +32,37 @@ class _ResepDetailState extends State<ResepDetail> {
               child: Container(
             color: Colors.grey[50],
           )),
-          SafeArea(
-            child: Container(
-              width: double.infinity,
-              height: 300,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(resep.thumb), fit: BoxFit.cover)),
-            ),
+          BlocBuilder<ResepdetailBloc, ResepdetailState>(
+            builder: (context, state) {
+              if (state is ResepdetailLoaded) {
+                return SafeArea(
+                  child: Container(
+                    width: double.infinity,
+                    height: 300,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                (state.resep.results!.thumb != null)
+                                    ? state.resep.results!.thumb.toString()
+                                    : widget.resep.thumb),
+                            fit: BoxFit.cover)),
+                  ),
+                );
+              } else {
+                return SafeArea(
+                    child: Shimmer.fromColors(
+                        child: Container(
+                          width: double.infinity,
+                          height: 300,
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/default-image.png'),
+                                  fit: BoxFit.fill)),
+                        ),
+                        baseColor: Colors.grey.shade300,
+                        highlightColor: Colors.grey.shade100));
+              }
+            },
           ),
           SafeArea(
             child: ListView(

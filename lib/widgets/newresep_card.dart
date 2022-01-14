@@ -24,7 +24,16 @@ class NewResepCard extends StatelessWidget {
         height: 209,
         width: 231,
         decoration: BoxDecoration(
-            color: kWhiteColor, borderRadius: BorderRadius.circular(14)),
+          color: kWhiteColor,
+          borderRadius: BorderRadius.circular(14),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.grey,
+              offset: Offset(0.0, 1.0),
+              blurRadius: 6.0,
+            ),
+          ],
+        ),
         child: Column(
           children: [
             Container(
