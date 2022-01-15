@@ -35,6 +35,7 @@ class _SplashPageState extends State<SplashPage> {
                   image: DecorationImage(
                       image: AssetImage('assets/cook-book.png'))),
             ),
+             Text('C O O K P A T H',style: blackTextStyle.copyWith(fontSize: 20,fontWeight: bold),)
           ],
         ),
       ),

@@ -20,7 +20,7 @@ class ResepCard extends StatelessWidget {
                     )));
       },
       child: Container(
-        height: 60,
+        height: 70,
         width: double.infinity,
         decoration: BoxDecoration(
           color: kWhiteColor,
@@ -36,9 +36,9 @@ class ResepCard extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: 60,
-              width: 60,
-              margin: const EdgeInsets.only(right: 12),
+              height: 70,
+              width: 70,
+              margin: const EdgeInsets.only(right: 5),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(8),
@@ -48,9 +48,12 @@ class ResepCard extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: Text(
-                resep.title,
-                style: blackTextStyle.copyWith(fontSize: 14, fontWeight: bold),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Text(
+                  resep.title,
+                  style: blackTextStyle.copyWith(fontSize: 14, fontWeight: bold),
+                ),
               ),
             )
           ],
