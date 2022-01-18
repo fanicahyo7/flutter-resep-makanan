@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/newresep/newresep_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/resep/resep_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/resepcategory/resepcategory_bloc.dart';
+import 'package:flutter_resep_makanan/pages/searc_page.dart';
 import 'package:flutter_resep_makanan/shared/theme.dart';
 import 'package:flutter_resep_makanan/widgets/button_category.dart';
 import 'package:flutter_resep_makanan/widgets/newresep_card.dart';
@@ -16,6 +17,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController searchController = TextEditingController();
+
   @override
   void initState() {
     context.read<NewresepBloc>().add(FetchNewResep());
@@ -107,7 +110,11 @@ class _HomePageState extends State<HomePage> {
                     .map((e) => Container(
                         margin: EdgeInsets.symmetric(
                             vertical: 10, horizontal: defaultMargin),
-                        child: ResepCard(resep: e,height: 70,width: 70,)))
+                        child: ResepCard(
+                          resep: e,
+                          height: 80,
+                          width: 80,
+                        )))
                     .toList(),
               );
             } else if (state is ResepFailed) {
@@ -161,6 +168,34 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
+    Widget search() {
+      return Container(
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(21))),
+        margin: EdgeInsets.fromLTRB(defaultMargin, 0, defaultMargin, 20),
+        child: TextField(
+            controller: searchController,
+            onEditingComplete: () {
+              if (searchController.text != '') {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SearchPage()));
+              }
+            },
+            style: blackTextStyle.copyWith(fontSize: 10),
+            decoration: InputDecoration(
+                hintText: 'Cari Resep Makanan',
+                hintStyle: greyTextStyle.copyWith(fontSize: 10),
+                border:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(21)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(21),
+                    borderSide: BorderSide(color: kPrimaryColor)))),
+      );
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -173,7 +208,7 @@ class _HomePageState extends State<HomePage> {
           )),
           SafeArea(
               child: ListView(
-            children: [header(), newResep(), category(), resepList()],
+            children: [header(), search(), newResep(), category(), resepList()],
           )),
         ],
       ),

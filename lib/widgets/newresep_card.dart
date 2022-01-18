@@ -21,7 +21,7 @@ class NewResepCard extends StatelessWidget {
       },
       child: Container(
         alignment: Alignment.topCenter,
-        height: 209,
+        height: 215,
         width: 231,
         decoration: BoxDecoration(
           color: kWhiteColor,
@@ -53,6 +53,7 @@ class NewResepCard extends StatelessWidget {
               margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
               child: Text(
                 resep.title,
+                maxLines: 2,
                 style: blackTextStyle.copyWith(fontWeight: bold),
               ),
             ))

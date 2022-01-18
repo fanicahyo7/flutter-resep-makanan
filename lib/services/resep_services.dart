@@ -47,4 +47,13 @@ class ResepServices {
       return ResepListModel.fromJson(e.response?.data);
     }
   }
+
+  Future<ResepListModel> searchResep(String key) async {
+    try {
+      Response response = await _dio.get(baseURL + "/search/?q=" + key);
+      return ResepListModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return ResepListModel.fromJson(e.response?.data);
+    }
+  }
 }

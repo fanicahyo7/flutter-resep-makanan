@@ -58,8 +58,8 @@ class _ResepByCategoryState extends State<ResepByCategory> {
                                     vertical: 10, horizontal: defaultMargin),
                                 child: ResepCard(
                                   resep: e,
-                                  height: 80,
-                                  width: 80,
+                                  height: 90,
+                                  width: 90,
                                 )))
                             .toList(),
                       );
