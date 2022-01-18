@@ -5,8 +5,4 @@ abstract class ResepcategoryEvent {}
 
 class FetchCategory extends ResepcategoryEvent {}
 
-class FetchResepByCategory extends ResepcategoryEvent {
-  final String key;
 
-  FetchResepByCategory(this.key);
-}

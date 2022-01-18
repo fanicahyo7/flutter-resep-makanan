@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                     .map((e) => Container(
                         margin: EdgeInsets.symmetric(
                             vertical: 10, horizontal: defaultMargin),
-                        child: ResepCard(resep: e)))
+                        child: ResepCard(resep: e,height: 70,width: 70,)))
                     .toList(),
               );
             } else if (state is ResepFailed) {
@@ -147,6 +147,7 @@ class _HomePageState extends State<HomePage> {
                                     : 0),
                             child: ButtonCattegory(
                               title: e.category,
+                              titlekey: e.key,
                             ),
                           ),
                         )

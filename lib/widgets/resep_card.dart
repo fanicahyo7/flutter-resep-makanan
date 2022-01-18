@@ -5,8 +5,10 @@ import 'package:flutter_resep_makanan/shared/theme.dart';
 
 class ResepCard extends StatelessWidget {
   final Resep resep;
+  final double height;
+  final double width;
 
-  const ResepCard({Key? key, required this.resep}) : super(key: key);
+  const ResepCard({Key? key, required this.resep, required this.height, required this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class ResepCard extends StatelessWidget {
                     )));
       },
       child: Container(
-        height: 70,
+        height: height,
         width: double.infinity,
         decoration: BoxDecoration(
           color: kWhiteColor,
@@ -36,8 +38,8 @@ class ResepCard extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: 70,
-              width: 70,
+              height: height,
+              width: width,
               margin: const EdgeInsets.only(right: 5),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(

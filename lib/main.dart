@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/newresep/newresep_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/resep/resep_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/resepcategory/resepcategory_bloc.dart';
+import 'package:flutter_resep_makanan/bloc/resepcategorylist/resepcategorylist_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/resepdetail/resepdetail_bloc.dart';
 import 'package:flutter_resep_makanan/pages/home_page.dart';
 import 'package:flutter_resep_makanan/pages/splash_page.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
           create: (context) => NewresepBloc(),
         ),
         BlocProvider(create: (context) => ResepcategoryBloc()),
-        BlocProvider(create: (context) => ResepdetailBloc())
+        BlocProvider(create: (context) => ResepdetailBloc()),
+        BlocProvider(create: (context) => ResepcategorylistBloc())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

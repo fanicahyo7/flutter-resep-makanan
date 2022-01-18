@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_resep_makanan/models/resep.dart';
 import 'package:flutter_resep_makanan/models/resep_category.dart';
 import 'package:flutter_resep_makanan/services/services.dart';
 import 'package:meta/meta.dart';
@@ -19,15 +18,6 @@ class ResepcategoryBloc extends Bloc<ResepcategoryEvent, ResepcategoryState> {
       }
     });
 
-    on<FetchResepByCategory>((event, emit) async {
-      try {
-        emit(ResepcategoryListLoading());
-        ResepListModel reseps =
-            await ResepServices().getResepByKategori(event.key);
-        emit(ResepcategoryListLoaded(reseps));
-      } catch (e) {
-        emit(ResepcategoryFailed(e.toString()));
-      }
-    });
+
   }
 }

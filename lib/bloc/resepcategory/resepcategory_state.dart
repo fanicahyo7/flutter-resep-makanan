@@ -18,16 +18,3 @@ class ResepcategoryLoaded extends ResepcategoryState {
   const ResepcategoryLoaded(this.list);
 }
 
-class ResepcategoryListInitial extends ResepcategoryState {}
-
-class ResepcategoryListLoading extends ResepcategoryState {}
-
-class ResepcategoryListFailed extends ResepcategoryState {
-  final String error;
-  ResepcategoryListFailed(this.error);
-}
-
-class ResepcategoryListLoaded extends ResepcategoryState {
-  final ResepListModel list;
-  const ResepcategoryListLoaded(this.list);
-}
