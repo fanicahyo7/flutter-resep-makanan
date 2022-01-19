@@ -1,4 +1,3 @@
-
 class ResepListModel {
   String? method;
   bool? status;
@@ -23,24 +22,19 @@ class Resep {
   final String title;
   final String thumb;
   final String times;
-  final String portion;
-  final String dificulty;
+  String? dificulty;
 
-  const Resep(
+  Resep(
       {required this.key,
       required this.title,
       required this.thumb,
       required this.times,
-      required this.portion,
-      required this.dificulty});
+      this.dificulty});
 
   factory Resep.fromJson(Map<String, dynamic> data) => Resep(
       key: data['key'],
       title: data['title'],
       thumb: data['thumb'],
       times: data['times'],
-      portion: data['portion'],
-      dificulty: data['dificulty']);
-
+      dificulty: data['difficulty'] ?? 'Mudah');
 }
-
