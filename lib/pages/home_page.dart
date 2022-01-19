@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/newresep/newresep_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/resep/resep_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/resepcategory/resepcategory_bloc.dart';
+import 'package:flutter_resep_makanan/pages/favorite_page.dart';
 import 'package:flutter_resep_makanan/pages/searc_page.dart';
 import 'package:flutter_resep_makanan/shared/theme.dart';
 import 'package:flutter_resep_makanan/widgets/button_category.dart';
@@ -210,7 +211,21 @@ class _HomePageState extends State<HomePage> {
           )),
           SafeArea(
               child: ListView(
-            children: [header(), search(), newResep(), category(), resepList()],
+            children: [
+              header(),
+              search(),
+              newResep(),
+              category(),
+              resepList(),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const FavoritePage()));
+                  },
+                  child: const Text('Tombol'))
+            ],
           )),
         ],
       ),

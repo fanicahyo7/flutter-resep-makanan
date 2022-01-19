@@ -25,3 +25,6 @@ FontWeight black = FontWeight.w900;
 
 double defaultMargin = 24.0;
 double defaultRadius = 17.0;
+
+
+// https://www.kindacode.com/article/flutter-sqlite/?
