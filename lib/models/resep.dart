@@ -37,4 +37,14 @@ class Resep {
       thumb: data['thumb'],
       times: data['times'],
       dificulty: data['difficulty'] ?? 'Mudah');
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'key': key,
+      'title': title,
+      'thumb': thumb,
+      'times': times,
+      'difficulty': dificulty
+    };
+  }
 }

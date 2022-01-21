@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_resep_makanan/models/resep.dart';
 import 'package:flutter_resep_makanan/services/sql_service.dart';
+import 'package:flutter_resep_makanan/shared/theme.dart';
+import 'package:flutter_resep_makanan/widgets/resep_card.dart';
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key}) : super(key: key);
@@ -9,9 +12,10 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  List<Map<String, dynamic>> _resepFavoriteList = [];
+  List<Resep> _resepFavoriteList = [];
 
   void _refreshResepFavorite() async {
+    _resepFavoriteList = [];
     final data = await SQLHelper.getItems();
     setState(() {
       _resepFavoriteList = data;
@@ -21,43 +25,49 @@ class _FavoritePageState extends State<FavoritePage> {
   @override
   void initState() {
     super.initState();
-
-    // _addItem();
-
     _refreshResepFavorite();
   }
-
-  // Insert a new journal to the database
-  Future<void> _addItem() async {
-    await SQLHelper.createItem('aaa', 'dsfdg', 'sdfg', 'fggsdf', 'dgsdg');
-    _refreshResepFavorite();
-  }
-
-  // // Update an existing journal
-  // Future<void> _updateItem(int id) async {
-  //   await SQLHelper.updateItem(
-  //       id, _titleController.text, _descriptionController.text);
-  //   _refreshJournals();
-  // }
-
-  // Delete an item
-  // void _deleteItem(int id) async {
-  //   await SQLHelper.deleteItem(id);
-  //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-  //     content: Text('Successfully deleted a journal!'),
-  //   ));
-  //   _refreshJournals();
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: ListView.builder(
-          itemCount: _resepFavoriteList.length,
-          itemBuilder: (context, index) =>
-              Text(_resepFavoriteList[index]['title']),
-        ),
+      body: Stack(
+        children: [
+          Container(
+            color: kPrimaryColor,
+          ),
+          SafeArea(
+              child: Container(
+            color: Colors.grey[50],
+          )),
+          SafeArea(
+              child: ListView(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(
+                    horizontal: defaultMargin, vertical: 20),
+                child: Text(
+                  'Resep Favorite',
+                  style:
+                      blackTextStyle.copyWith(fontSize: 20, fontWeight: bold),
+                ),
+              ),
+              Column(
+                children: _resepFavoriteList
+                    .map((e) => Container(
+                          margin: EdgeInsets.symmetric(
+                              horizontal: defaultMargin, vertical: 10),
+                          child: ResepCard(
+                            resep: e,
+                            height: 80,
+                            width: 80,
+                          ),
+                        ))
+                    .toList(),
+              ),
+            ],
+          )),
+        ],
       ),
     );
   }

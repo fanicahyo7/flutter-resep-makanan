@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_resep_makanan/bloc/resepdetail/resepdetail_bloc.dart';
 import 'package:flutter_resep_makanan/models/resep.dart';
+import 'package:flutter_resep_makanan/services/sql_service.dart';
 import 'package:flutter_resep_makanan/shared/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_resep_makanan/widgets/tabbar_detail.dart';
@@ -16,10 +17,29 @@ class ResepDetail extends StatefulWidget {
 
 class _ResepDetailState extends State<ResepDetail> {
   int selectedIndex = 0;
+  bool isFavorite = false;
+  Resep? resepFavoriteList;
+
+  void _refreshResepFavorite() async {
+    final data = await SQLHelper.getItem(widget.resep.key);
+
+    if (data.title != '') {
+      setState(() {
+        resepFavoriteList = Resep(
+            key: data.key,
+            title: data.title,
+            thumb: data.thumb,
+            times: data.times);
+      });
+      isFavorite = resepFavoriteList != null ? true : false;
+    }
+  }
 
   @override
   void initState() {
+    _refreshResepFavorite();
     context.read<ResepdetailBloc>().add(FetchResepDetail(widget.resep.key));
+
     super.initState();
   }
 
@@ -124,6 +144,21 @@ class _ResepDetailState extends State<ResepDetail> {
       );
     }
 
+    Future<void> _addItem() async {
+      await SQLHelper.createItem(Resep(
+          key: widget.resep.key,
+          title: widget.resep.title,
+          thumb: widget.resep.thumb,
+          times: widget.resep.times));
+    }
+
+    void _deleteItem(String key) async {
+      await SQLHelper.deleteItem(key);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Berhasil menghapus dari Favorit!'),
+      ));
+    }
+
     Widget detail() {
       return SafeArea(
         child: ListView(
@@ -162,10 +197,40 @@ class _ResepDetailState extends State<ResepDetail> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.resep.title,
-                    style:
-                        blackTextStyle.copyWith(fontWeight: bold, fontSize: 20),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width - 90,
+                        child: Text(
+                          widget.resep.title,
+                          style: blackTextStyle.copyWith(
+                              fontWeight: bold, fontSize: 20),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            if (isFavorite) {
+                              _deleteItem(widget.resep.key);
+                              isFavorite = false;
+                            } else {
+                              _addItem();
+                              isFavorite = true;
+                            }
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Icon(
+                            (isFavorite)
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            size: 30,
+                            color: (isFavorite) ? Colors.pink : Colors.grey,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                   const SizedBox(
                     height: 20,

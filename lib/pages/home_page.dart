@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                         MaterialPageRoute(
                             builder: (context) => const FavoritePage()));
                   },
-                  child: const Text('Tombol'))
+                  child: const Text('Favorite'))
             ],
           )),
         ],
