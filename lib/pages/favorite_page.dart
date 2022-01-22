@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_resep_makanan/models/resep.dart';
+import 'package:flutter_resep_makanan/pages/resep_detail.dart';
 import 'package:flutter_resep_makanan/services/sql_service.dart';
 import 'package:flutter_resep_makanan/shared/theme.dart';
 import 'package:flutter_resep_makanan/widgets/resep_card.dart';
@@ -20,6 +23,11 @@ class _FavoritePageState extends State<FavoritePage> {
     setState(() {
       _resepFavoriteList = data;
     });
+  }
+
+  FutureOr refreshdata(dynamic value) {
+    _refreshResepFavorite();
+    setState(() {});
   }
 
   @override
@@ -53,17 +61,34 @@ class _FavoritePageState extends State<FavoritePage> {
                 ),
               ),
               Column(
-                children: _resepFavoriteList
-                    .map((e) => Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: defaultMargin, vertical: 10),
-                          child: ResepCard(
-                            resep: e,
-                            height: 80,
-                            width: 80,
-                          ),
-                        ))
-                    .toList(),
+                children: (_resepFavoriteList.isEmpty)
+                    ? [
+                        Text(
+                          'Tidak ada Resep Favorit',
+                          style: blackTextStyle.copyWith(fontWeight: bold),
+                        )
+                      ]
+                    : _resepFavoriteList
+                        .map((e) => Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: defaultMargin, vertical: 10),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ResepDetail(
+                                                resep: e,
+                                              ))).then(refreshdata);
+                                },
+                                child: ResepCard(
+                                  resep: e,
+                                  height: 80,
+                                  width: 80,
+                                ),
+                              ),
+                            ))
+                        .toList(),
               ),
             ],
           )),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/resepcategorylist/resepcategorylist_bloc.dart';
+import 'package:flutter_resep_makanan/pages/resep_detail.dart';
 import 'package:flutter_resep_makanan/shared/theme.dart';
 import 'package:flutter_resep_makanan/widgets/resep_card.dart';
 
@@ -56,10 +57,19 @@ class _ResepByCategoryState extends State<ResepByCategory> {
                             .map((e) => Container(
                                 margin: EdgeInsets.symmetric(
                                     vertical: 10, horizontal: defaultMargin),
-                                child: ResepCard(
-                                  resep: e,
-                                  height: 90,
-                                  width: 90,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ResepDetail(resep: e)));
+                                  },
+                                  child: ResepCard(
+                                    resep: e,
+                                    height: 90,
+                                    width: 90,
+                                  ),
                                 )))
                             .toList(),
                       );

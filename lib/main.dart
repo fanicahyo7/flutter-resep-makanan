@@ -6,7 +6,7 @@ import 'package:flutter_resep_makanan/bloc/resepcategory/resepcategory_bloc.dart
 import 'package:flutter_resep_makanan/bloc/resepcategorylist/resepcategorylist_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/resepdetail/resepdetail_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/searchresep/searchresep_bloc.dart';
-import 'package:flutter_resep_makanan/pages/home_page.dart';
+import 'package:flutter_resep_makanan/pages/main_page.dart';
 import 'package:flutter_resep_makanan/pages/splash_page.dart';
 
 void main() {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(),
         routes: {
           '/': (context) => const SplashPage(),
-          '/home': (context) => const HomePage(),
+          '/main': (context) => const MainPage(),
         },
       ),
     );
