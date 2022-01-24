@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_resep_makanan/bloc/searchresep/searchresep_bloc.dart';
+import 'package:flutter_resep_makanan/pages/resep_detail.dart';
 import 'package:flutter_resep_makanan/shared/theme.dart';
 import 'package:flutter_resep_makanan/widgets/resep_card.dart';
 
@@ -36,6 +37,7 @@ class _SearchPageState extends State<SearchPage> {
                 context
                     .read<SearchresepBloc>()
                     .add(SearchResep(searchController.text));
+                FocusManager.instance.primaryFocus!.unfocus();
               });
             }
           },
@@ -61,7 +63,14 @@ class _SearchPageState extends State<SearchPage> {
                 .map((e) => Container(
                     margin: EdgeInsets.symmetric(
                         horizontal: defaultMargin, vertical: 10),
-                    child: ResepCard(resep: e, height: 80, width: 80)))
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ResepDetail(resep: e)));
+                        },
+                        child: ResepCard(resep: e, height: 80, width: 80))))
                 .toList(),
           );
         } else {

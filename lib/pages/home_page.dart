@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Resep Makanan',
+              'COOKPATH',
               style:
                   blackTextStyle.copyWith(fontWeight: semibold, fontSize: 30),
             ),
@@ -195,6 +195,7 @@ class _HomePageState extends State<HomePage> {
                         builder: (context) => SearchPage(
                               stringkey: searchController.text,
                             )));
+                FocusManager.instance.primaryFocus!.unfocus();
               }
             },
             style: blackTextStyle.copyWith(fontSize: 10),
