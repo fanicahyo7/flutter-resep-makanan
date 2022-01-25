@@ -100,9 +100,27 @@ class _ResepDetailState extends State<ResepDetail> {
             BlocBuilder<ResepdetailBloc, ResepdetailState>(
                 builder: (context, state) {
               if (state is ResepdetailLoaded) {
+                String kalimatbaru = "";
+                String ambilkalimat = state.resep.results!.desc!.substring(0,state.resep.results!.desc!.length-1);
+                var kalimat = state.resep.results!.desc?.split(".");
+                // for (int a = 0; a <= kalimat!.length-1; a++) {
+                //   print(kalimat[a].substring(0,1));
+                //   if (kalimat[a].substring(0,1) != " ") {
+                //     if (a == 0) {
+                //       kalimatbaru += "\t\t\t" + kalimat[a].trimLeft();
+                //     }else{
+                //       kalimatbaru += "\n\t\t\t" + kalimat[a].trimLeft();
+                //     }
+                    
+                //   } else {
+                //     kalimatbaru += kalimat[a];
+                //   }
+                // }
+                kalimatbaru = state.resep.results!.desc.toString();
+
                 if (selectedIndex == 0) {
                   return Text(
-                    state.resep.results!.desc.toString(),
+                    kalimatbaru,
                     style: blackTextStyle.copyWith(fontSize: 14),
                     textAlign: TextAlign.justify,
                   );
